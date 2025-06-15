@@ -8,8 +8,11 @@ maxRecentWindows := 10
 ; Start monitoring window focus changes
 SetTimer(TrackActiveWindow, 100)
 
-; Hotkey: Ctrl+Shift+W to swap the two most recent windows
-^+w::SwapRecentWindows()
+; Hotkey: Ctrl+Shift+Q to swap the two most recent windows
+^+q::SwapRecentWindows()
+
+; Hotkey: Ctrl+Shift+E to exit the script
+^+e::ExitApp()
 
 TrackActiveWindow() {
     try {
