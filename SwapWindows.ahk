@@ -1,8 +1,6 @@
 #Requires AutoHotkey v2
 DetectHiddenWindows False
 
-MsgBox "Moving all windows using Win+Shift+Right Arrow...`nThis will move windows to the next monitor."
-
 movedCount := 0
 skippedCount := 0
 processedWindows := Map()
@@ -32,9 +30,6 @@ for this_id in idList {
     }
 }
 
-MsgBox "Found " windowsToMove.Length " windows to move. Starting in 2 seconds..."
-Sleep(2000)
-
 ; Second pass: move each window
 for window in windowsToMove {
     ; Skip if we already processed this window
@@ -54,8 +49,8 @@ for window in windowsToMove {
         
         ; Focus the window first
         WinActivate("ahk_id " window.id)
-        ; Wait longer to ensure window is properly focused
-        Sleep(200)
+        ; Minimal delay to ensure window is focused
+        Sleep(50)
         
         ; Verify the window is actually active
         activeId := WinGetID("A")
@@ -67,8 +62,8 @@ for window in windowsToMove {
         ; Send Win+Shift+Right Arrow to move to next monitor
         Send("#+{Right}")
         
-        ; Wait for the move to complete
-        Sleep(300)
+        ; Brief wait for the move to complete
+        Sleep(100)
         
         ; Verify the window actually moved
         newX := newY := newW := newH := ""
