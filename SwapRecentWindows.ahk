@@ -15,6 +15,7 @@ SetTimer(TrackActiveWindow, 100)
 ^+e::ExitApp()
 
 TrackActiveWindow() {
+    global recentWindows, maxRecentWindows
     try {
         hwnd := WinGetID("A")
         title := WinGetTitle("A")
@@ -40,6 +41,7 @@ TrackActiveWindow() {
 }
 
 SwapRecentWindows() {
+    global recentWindows
     if (recentWindows.Length < 2) {
         ; Not enough recent windows to swap
         return
@@ -78,6 +80,7 @@ SwapRecentWindows() {
 }
 
 CleanupInvalidWindows() {
+    global recentWindows
     validWindows := []
     for window in recentWindows {
         if (WinExist("ahk_id " window.id) && DllCall("IsWindowVisible", "Ptr", window.id)) {
